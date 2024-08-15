@@ -57,5 +57,5 @@ nx.plots.metrics(factor_metrics, title="Factor Metrics Performance") # IC perfor
 ```python
 import nebula_xplorer as nx
 nx.reports.info(return_table, factor_metrics) # summary tables
-nx.reports.html(factors, targets, benchmarks) # pics
+nx.reports.html(factors, targets, benchmarks=None, n_groups=20, n_top=[200, 1000]) # pics
 ```
