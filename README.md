@@ -30,8 +30,8 @@ Supports DataFrames in Polars format; Pandas format will be considered in the fu
 #### DataProcess
 ```python
 import nebula_xplorer as nx
-full_data = nx.utils.prepare(factor, targets)
-return_table = nx.utils.getReturnTable(full_data, benchmarks=None, n_groups=10, n_top=[200, 1000])
+full_data = nx.utils.prepare(factors, targets)
+return_table = nx.utils.getReturnTable(full_data, factor_name, target_name, benchmarks=None, n_groups=10, n_top=[200, 1000])
 
 ```
 
