@@ -38,8 +38,8 @@ def snapshot(return_table):
     axes[1].set_ylabel("Drawdown", fontweight="bold", fontsize=12)
     axes[0].set_ylabel("Net Value", fontweight="bold", fontsize=12)
     axes[2].set_ylabel("Returns", fontweight="bold", fontsize=12)
-    plt.tight_layout()
     fig.suptitle("Portfolia Performance", fontsize=10)
+    plt.tight_layout()
     return fig
 
 
