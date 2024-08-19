@@ -97,3 +97,26 @@ def getPortStat(return_table, annl_year=252):
     stat_return['MaxDDStart'] = max_dd_start
     stat_return['MaxDDEnd'] = max_dd_end
     return pd.DataFrame(stat_return).round(2)
+
+def dd_details(return_table):
+    drawdowns = DDS(return_table)
+    value_name = return_table.columns[0]+"_dd"
+    split_indices = drawdowns.index[drawdowns[value_name] == 0].tolist()
+    split_positions = [drawdowns.index.get_loc(idx) for idx in split_indices]
+    split_indices = [-1] + split_positions + [len(drawdowns)]
+    dfs = [drawdowns.iloc[split_indices[i]:split_indices[i+1]+1] for i in range(len(split_indices)-1)]
+    dfs = [x for x in dfs if len(x[x.values!=0]) > 0]
+    return sorted(dfs, key=lambda x: x[value_name].max(), reverse=True)
+
+def worstdd(return_table, n=5):
+    ddd = dd_details(return_table)[:n]
+    started = [x.index[0].strftime('%Y-%m-%d') for x in ddd]
+    ended = [x.index[-1].strftime('%Y-%m-%d') for x in ddd]
+    dd = [x.max().values[0] for x in ddd]
+    periods = [x.shape[0] for x in ddd]
+    return pd.DataFrame({
+        'Started': started,
+        'Ended': ended,
+        'DrawDown': dd,
+        'Days': periods
+    })
